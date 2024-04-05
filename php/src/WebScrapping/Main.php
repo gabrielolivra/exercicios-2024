@@ -129,6 +129,9 @@ $data[] = [
 }
 }
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
+use Box\Spout\Writer\Common\Creator\Style\StyleBuilder;
+use Box\Spout\Common\Entity\Style\CellAlignment;
+use Box\Spout\Common\Entity\Style\Color;
 
 $data = Main::run();
 
@@ -148,7 +151,12 @@ $header = [
     'Author 6', 'Author 6 Institution', 'Author 7', 'Author 7 Institution',
     'Author 8', 'Author 8 Institution', 'Author 9', 'Author 9 Institution'
 ];
-$headerRow = WriterEntityFactory::createRowFromArray($header);
+$styleCabecalho = (new StyleBuilder())->setFontBold()->setFontName('Arial')->setFontSize(10)->build();
+
+// Cria a linha de cabeçalho com o estilo
+$headerRow = WriterEntityFactory::createRowFromArray($header, $styleCabecalho);
+
+// Adiciona a linha de cabeçalho ao escritor
 $writer->addRow($headerRow);
 
 // Itera sobre os dados
@@ -177,9 +185,10 @@ foreach ($data as $row) {
         WriterEntityFactory::createCell($row['author9']),
         WriterEntityFactory::createCell($row['universidade9'])
     ];
+    $styleDados = (new StyleBuilder())->setFontName('Arial')->setFontSize(10)->build();
 
     // Cria uma linha com as células
-    $rowData = WriterEntityFactory::createRow($cells);
+    $rowData = WriterEntityFactory::createRow($cells, $styleDados);
 
     // Adiciona a linha ao escritor
     $writer->addRow($rowData);
