@@ -1,7 +1,8 @@
 <?php
 namespace Chuva\Php\WebScrapping;
-require_once 'vendor/autoload.php';
-use Box\Spout\Reader\Common\Creator\ReaderEntityFactory;
+//use Box\Spout\Common\Entity\Row;
+require __DIR__.'../../vendor/autoload.php';
+
 
 class Main {
 
@@ -102,35 +103,87 @@ $autoresUni = implode(', ', $universidades);
 $data[] = [
     'id' => $id,
     'title' => $titulo,
+    'type' => $type,
     'author1' => $autor1,
-    'author2' => $autor2,
-    'author3' => $autor3,
-    'author4' => $autor4,
-    'author5' => $autor5,
-    'author6' => $autor6,
-    'author7' => $autor7,
-    'author8' => $autor8,
-    'author9' => $autor9,
     'universidade1' => $universidade1,
+    'author2' => $autor2,
     'universidade2' => $universidade2,
+    'author3' => $autor3,
     'universidade3' => $universidade3,
+    'author4' => $autor4,
     'universidade4' => $universidade4,
+    'author5' => $autor5,
     'universidade5' => $universidade5,
+    'author6' => $autor6,
     'universidade6' => $universidade6,
+    'author7' => $autor7,
     'universidade7' => $universidade7,
+    'author8' => $autor8,
     'universidade8' => $universidade8,
-    'universidade9' => $universidade9,
-    'type' => $type
+    'author9' => $autor9,
+    'universidade9' => $universidade9    
 ];
-
 
 }
  return $data;
 }
 }
+use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
 
- $data = Main::run();
+$data = Main::run();
 
- print_r($data);
+$file = __DIR__.'/../../assets/model-resultado.xlsx';
 
+// Cria o escritor
+$writer = WriterEntityFactory::createXLSXWriter();
 
+// Abre o arquivo para escrita
+$writer->openToFile($file);
+
+// Adiciona o cabeçalho
+$header = [
+    'ID', 'Title', 'Type', 'Author 1', 'Author 1 Institution',
+    'Author 2', 'Author 2 Institution', 'Author 3', 'Author 3 Institution',
+    'Author 4', 'Author 4 Institution', 'Author 5', 'Author 5 Institution',
+    'Author 6', 'Author 6 Institution', 'Author 7', 'Author 7 Institution',
+    'Author 8', 'Author 8 Institution', 'Author 9', 'Author 9 Institution'
+];
+$headerRow = WriterEntityFactory::createRowFromArray($header);
+$writer->addRow($headerRow);
+
+// Itera sobre os dados
+foreach ($data as $row) {
+    // Cria um array de células para esta linha
+    $cells = [
+        WriterEntityFactory::createCell($row['id']),
+        WriterEntityFactory::createCell($row['title']),
+        WriterEntityFactory::createCell($row['type']),
+        WriterEntityFactory::createCell($row['author1']),
+        WriterEntityFactory::createCell($row['universidade1']),
+        WriterEntityFactory::createCell($row['author2']),
+        WriterEntityFactory::createCell($row['universidade2']),
+        WriterEntityFactory::createCell($row['author3']),
+        WriterEntityFactory::createCell($row['universidade3']),
+        WriterEntityFactory::createCell($row['author4']),
+        WriterEntityFactory::createCell($row['universidade4']),
+        WriterEntityFactory::createCell($row['author5']),
+        WriterEntityFactory::createCell($row['universidade5']),
+        WriterEntityFactory::createCell($row['author6']),
+        WriterEntityFactory::createCell($row['universidade6']),
+        WriterEntityFactory::createCell($row['author7']),
+        WriterEntityFactory::createCell($row['universidade7']),
+        WriterEntityFactory::createCell($row['author8']),
+        WriterEntityFactory::createCell($row['universidade8']),
+        WriterEntityFactory::createCell($row['author9']),
+        WriterEntityFactory::createCell($row['universidade9'])
+    ];
+
+    // Cria uma linha com as células
+    $rowData = WriterEntityFactory::createRow($cells);
+
+    // Adiciona a linha ao escritor
+    $writer->addRow($rowData);
+}
+
+// Fecha o arquivo
+$writer->close();
