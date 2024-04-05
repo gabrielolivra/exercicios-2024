@@ -8,9 +8,15 @@ class Main {
   public static function run(): array {
     $dom = new \DOMDocument('1.0', 'utf-8');
     $dom->loadHTMLFile(__DIR__ . '/../../assets/origin.html');
-    $allLinks = $dom->getElementsByTagName('a');
-    $data = [];
+    
+    $xpath = new \DOMXPath($dom);
+    
+// Filtrar tag a com a classe especifica
 
+    $query = "//a[contains(concat(' ', normalize-space(@class), ' '), ' paper-card p-lg bd-gradient-left ')]";
+    $allLinks = $xpath->query($query);
+    
+    $data = [];
 
 // Ler arquivos do origin.html
 
@@ -33,6 +39,7 @@ class Main {
                 break; 
             }
         }
+
 // Extrai o titulo
 
 
@@ -42,7 +49,6 @@ class Main {
             $titulo = ''; 
         }
 
-        
 // Extrai os autores
 
 $authors = [];
@@ -65,7 +71,6 @@ if (count($authors) > 9) {
 
 $autores = implode(', ', $authors);
 
-
 // extrai universidades
 
 $universidades = [];
@@ -80,23 +85,20 @@ for ($i = 1; $i <= 10; $i++) {
 }
 
 // Inicialize as variáveis de universidade
+
+
 $universidade1 = ''; $universidade2 = ''; $universidade3 = ''; $universidade4 = ''; $universidade5 = ''; $universidade6 = ''; $universidade7 = '';
 $universidade8 = ''; $universidade9 = '';
 
-// Atribua os valores das universidades às variáveis correspondentes
 for ($i = 0; $i < count($universidades); $i++) {
     ${'universidade' . ($i + 1)} = $universidades[$i];
 }
 
-// Remova universidades extras se houver mais de 9
 if (count($universidades) > 9) {
     array_splice($universidades, 9);
 }
 
-// Junte as universidades em uma string separada por vírgula
 $autoresUni = implode(', ', $universidades);
-
-// Adicione as variáveis das universidades ao array $data
 $data[] = [
     'id' => $id,
     'title' => $titulo,
@@ -122,86 +124,13 @@ $data[] = [
 ];
 
 
-
-    }
-
-    $writer = \Box\Spout\Writer\Common\Creator\WriterEntityFactory::createXLSXWriter(); // Corrigido o namespace aqui
-    $outputFilePath = realpath(__DIR__ . '/../../assets/model.xlsx');
-
-    // Se o arquivo não existir, cria um novo
-    if (!file_exists($outputFilePath)) {
-        $writer = \Box\Spout\Writer\Common\Creator\WriterEntityFactory::createXLSXWriter();
-        $writer->openToFile($outputFilePath);
-    
-        // Defina o cabeçalho da planilha
-        $headers = [
-            'ID',
-            'Title',
-            'Author 1',
-            'Author 2',
-            'Author 3',
-            'Author 4',
-            'Author 5',
-            'Author 6',
-            'Author 7',
-            'Author 8',
-            'Author 9',
-            'University 1',
-            'University 2',
-            'University 3',
-            'University 4',
-            'University 5',
-            'University 6',
-            'University 7',
-            'University 8',
-            'University 9',
-            'Type'
-        ];
-        $headerRow = WriterEntityFactory::createRowFromArray($headers);
-        $writer->addRow($headerRow);
-    } else {
-        // Se o arquivo já existir, abra-o para adicionar novas linhas
-        $writer = \Box\Spout\Writer\Common\Creator\WriterEntityFactory::createXLSXWriter();
-        $writer->openToFile($outputFilePath, 'a'); // 'a' para adicionar novas linhas
-    }
-    
-    // Adicione os dados ao arquivo
-    foreach ($data as $row) {
-        $rowData = WriterEntityFactory::createRowFromArray([
-            $row['id'],
-            $row['title'],
-            $row['author1'],
-            $row['author2'],
-            $row['author3'],
-            $row['author4'],
-            $row['author5'],
-            $row['author6'],
-            $row['author7'],
-            $row['author8'],
-            $row['author9'],
-            $row['universidade1'],
-            $row['universidade2'],
-            $row['universidade3'],
-            $row['universidade4'],
-            $row['universidade5'],
-            $row['universidade6'],
-            $row['universidade7'],
-            $row['universidade8'],
-            $row['universidade9'],
-            $row['type']
-        ]);
-        $writer->addRow($rowData);
-    }
-    
-    // Feche o arquivo
-    $writer->close();
-    
-    return $data;
-
+}
+ return $data;
+}
 }
 
- }
+ $data = Main::run();
 
- $resultsFromHTML = Main::run();
+ print_r($data);
 
 
