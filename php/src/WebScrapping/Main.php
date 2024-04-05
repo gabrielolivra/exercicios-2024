@@ -1,6 +1,5 @@
 <?php
 namespace Chuva\Php\WebScrapping;
-//use Box\Spout\Common\Entity\Row;
 require __DIR__.'../../vendor/autoload.php';
 
 
@@ -125,7 +124,8 @@ $data[] = [
 ];
 
 }
- return $data;
+    return $data;
+
 }
 }
 use Box\Spout\Writer\Common\Creator\WriterEntityFactory;
@@ -138,12 +138,15 @@ $data = Main::run();
 $file = __DIR__.'/../../assets/model-resultado.xlsx';
 
 // Cria o escritor
+
 $writer = WriterEntityFactory::createXLSXWriter();
 
 // Abre o arquivo para escrita
+
 $writer->openToFile($file);
 
 // Adiciona o cabeçalho
+
 $header = [
     'ID', 'Title', 'Type', 'Author 1', 'Author 1 Institution',
     'Author 2', 'Author 2 Institution', 'Author 3', 'Author 3 Institution',
@@ -154,14 +157,18 @@ $header = [
 $styleCabecalho = (new StyleBuilder())->setFontBold()->setFontName('Arial')->setFontSize(10)->build();
 
 // Cria a linha de cabeçalho com o estilo
+
 $headerRow = WriterEntityFactory::createRowFromArray($header, $styleCabecalho);
 
 // Adiciona a linha de cabeçalho ao escritor
+
 $writer->addRow($headerRow);
 
 // Itera sobre os dados
 foreach ($data as $row) {
+
     // Cria um array de células para esta linha
+
     $cells = [
         WriterEntityFactory::createCell($row['id']),
         WriterEntityFactory::createCell($row['title']),
@@ -188,11 +195,14 @@ foreach ($data as $row) {
     $styleDados = (new StyleBuilder())->setFontName('Arial')->setFontSize(10)->build();
 
     // Cria uma linha com as células
+
     $rowData = WriterEntityFactory::createRow($cells, $styleDados);
 
     // Adiciona a linha ao escritor
+
     $writer->addRow($rowData);
 }
 
 // Fecha o arquivo
+
 $writer->close();
