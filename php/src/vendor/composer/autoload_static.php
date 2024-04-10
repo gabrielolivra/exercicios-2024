@@ -7,14 +7,14 @@ namespace Composer\Autoload;
 class ComposerStaticInitebdf7b0ebceeb09d70e9aa855cf9a73f
 {
     public static $prefixLengthsPsr4 = array (
-        'B' => 
+        'B' =>
         array (
             'Box\\Spout\\' => 10,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'Box\\Spout\\' => 
+        'Box\\Spout\\' =>
         array (
             0 => __DIR__ . '/..' . '/box/spout/src/Spout',
         ),
@@ -30,7 +30,6 @@ class ComposerStaticInitebdf7b0ebceeb09d70e9aa855cf9a73f
             $loader->prefixLengthsPsr4 = ComposerStaticInitebdf7b0ebceeb09d70e9aa855cf9a73f::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitebdf7b0ebceeb09d70e9aa855cf9a73f::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInitebdf7b0ebceeb09d70e9aa855cf9a73f::$classMap;
-
         }, null, ClassLoader::class);
     }
 }
