@@ -6,14 +6,10 @@ use Chuva\Php\WebScrapping\Entity\Paper;
 use Chuva\Php\WebScrapping\Entity\Person;
 use PHPUnit\Framework\TestCase;
 
-/**
- * Tests requirements for Paper.
- */
+
 class PaperTest extends TestCase {
 
-  /**
-   * Tests construct().
-   */
+
   public function testConstruct() {
     $paper = new Paper(123, 'Paper title', 'Oral presentation', [
       new Person('Evariste Galois', 'Lycée Louis-le-Grand'),
