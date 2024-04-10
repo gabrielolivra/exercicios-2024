@@ -513,12 +513,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHPCSStandards/PHP_CodeSniffer.git",
-                "reference": "82ad715a370d9e0fbcfd428896f615d9ce3a17c5"
+                "reference": "b3a6b3204208824c1862948b675efdb48925c89c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/82ad715a370d9e0fbcfd428896f615d9ce3a17c5",
-                "reference": "82ad715a370d9e0fbcfd428896f615d9ce3a17c5",
+                "url": "https://api.github.com/repos/PHPCSStandards/PHP_CodeSniffer/zipball/b3a6b3204208824c1862948b675efdb48925c89c",
+                "reference": "b3a6b3204208824c1862948b675efdb48925c89c",
                 "shasum": ""
             },
             "require": {
@@ -586,7 +586,7 @@
                     "type": "open_collective"
                 }
             ],
-            "time": "2024-04-03T01:56:19+00:00"
+            "time": "2024-04-10T15:30:59+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -1378,12 +1378,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c1f736a473d21957ead7e94fcc029f571895abf5"
+                "reference": "db246ba1044f348d20de1d4b879767afca07f5c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c1f736a473d21957ead7e94fcc029f571895abf5",
-                "reference": "c1f736a473d21957ead7e94fcc029f571895abf5",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/db246ba1044f348d20de1d4b879767afca07f5c8",
+                "reference": "db246ba1044f348d20de1d4b879767afca07f5c8",
                 "shasum": ""
             },
             "require": {
@@ -1455,7 +1455,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.17"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5"
             },
             "funding": [
                 {
@@ -1471,7 +1471,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-04-05T04:39:01+00:00"
+            "time": "2024-04-10T13:53:48+00:00"
         },
         {
             "name": "sebastian/cli-parser",
@@ -2457,5 +2457,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }
