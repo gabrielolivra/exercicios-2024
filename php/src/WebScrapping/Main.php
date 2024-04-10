@@ -19,15 +19,14 @@ class Main {
 
 $file = __DIR__.'/../../assets/model-resultado.xlsx';
 
-// Cria o escritor
+
 
 $writer = WriterEntityFactory::createXLSXWriter();
 
-// Abre o arquivo para escrita
+
 
 $writer->openToFile($file);
 
-// Adiciona o cabeçalho
 
 $header = [
     'ID', 'Title', 'Type', 'Author 1', 'Author 1 Institution',
@@ -37,22 +36,21 @@ $header = [
     'Author 8', 'Author 8 Institution', 'Author 9', 'Author 9 Institution'
 ];
 
-// Adiciona estilos no cabeçalho
+
 
 $styleCabecalho = (new StyleBuilder())->setFontBold()->setFontName('Arial')->setFontSize(10)->build();
 
-// Cria a linha de cabeçalho com o estilo
+
 
 $headerRow = WriterEntityFactory::createRowFromArray($header, $styleCabecalho);
 
-// Adiciona a linha de cabeçalho ao escritor
+
 
 $writer->addRow($headerRow);
 
-// Itera sobre os dados
+
 foreach ($data as $row) {
 
-    // Cria um array de células para esta linha
 
     $cells = [
         WriterEntityFactory::createCell($row['id']),
@@ -78,20 +76,20 @@ foreach ($data as $row) {
         WriterEntityFactory::createCell($row['universidade9'])
     ];
 
-    // Adiciona estilos aos dados exibidos no excel
+ 
 
     $styleDados = (new StyleBuilder())->setFontName('Arial')->setFontSize(10)->build();
 
-    // Cria uma linha com as células
+    
 
     $rowData = WriterEntityFactory::createRow($cells, $styleDados);
 
-    // Adiciona a linha ao escritor
+    
 
     $writer->addRow($rowData);
 }
 
-// Fecha o arquivo
+
 
 $writer->close();
 

@@ -5,14 +5,9 @@ namespace Chuva\Php\WebScrapping;
 use Chuva\Php\WebScrapping\Entity\Paper;
 use Chuva\Php\WebScrapping\Entity\Person;
 
-/**
- * Does the scrapping of a webpage.
- */
+
 class Scrapper {
 
-  /**
-   * Loads paper information from the HTML and returns the array with the data.
-   */
   public function scrap(\DOMDocument $dom): array {
 
     $dom = new \DOMDocument('1.0', 'utf-8');
@@ -20,14 +15,11 @@ class Scrapper {
     
     $xpath = new \DOMXPath($dom);
     
-// Filtrar tag a com a classe especifica
+
 
     $query = "//a[contains(concat(' ', normalize-space(@class), ' '), ' paper-card p-lg bd-gradient-left ')]";
     $allLinks = $xpath->query($query);
     
-    //$data = [];
-
-// Ler arquivos do origin.html
 
 
     foreach ($allLinks as $link) {
@@ -35,7 +27,7 @@ class Scrapper {
         $textContent = trim($link->textContent);
         $href = $link->getAttribute('href');
 
-// Extrai o id'
+
 
     preg_match('~/_papers/(\d+)~', $href, $matches);
         $id = $matches[1] ?? '';
@@ -49,7 +41,7 @@ class Scrapper {
             }
         }
 
-// Extrai o titulo
+
 
 
         if ($link->getElementsByTagName('h4')->length > 0) {
@@ -58,7 +50,6 @@ class Scrapper {
             $titulo = ''; 
         }
 
-// Extrai os autores
 
 $authors = [];
 
@@ -80,7 +71,7 @@ if (count($authors) > 9) {
 
 $autores = implode(', ', $authors);
 
-// extrai universidades
+
 
 $universidades = [];
 
@@ -93,7 +84,7 @@ for ($i = 1; $i <= 10; $i++) {
     }
 }
 
-// Inicialize as variáveis de universidade
+
 
 
 $universidade1 = ''; $universidade2 = ''; $universidade3 = ''; $universidade4 = ''; $universidade5 = ''; $universidade6 = ''; $universidade7 = '';
